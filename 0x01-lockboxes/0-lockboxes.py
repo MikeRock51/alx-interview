@@ -1,4 +1,4 @@
-#!usr/bin/python3
+#!/usr/bin/python3
 """Solution to 0x01-lockboxes interview question"""
 
 def canUnlockAll(boxes):
