@@ -7,6 +7,9 @@ def canUnlockAll(boxes):
     unusedKeys = []
     locked = []
 
+    if len(boxes) == 0:
+        return True
+
     index = 1
     while index < len(boxes) - 1:
         currentKeys = boxes[index - 1]
