@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Solution to 0x01-lockboxes interview question"""
 
+
 def canUnlockAll(boxes):
     """Checks whether or not all lockboxes can be unlocked"""
     unusedKeys = []
@@ -22,6 +23,6 @@ def canUnlockAll(boxes):
         return True
 
     for index in locked:
-        if not index in unusedKeys:
+        if index not in unusedKeys:
             return False
     return True
