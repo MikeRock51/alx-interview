@@ -1,7 +1,8 @@
 #!usr/bin/python3
-"""Lockboxes"""
+"""Solution to 0x01-lockboxes interview question"""
 
 def canUnlockAll(boxes):
+    """Checks whether or not all lockboxes can be unlocked"""
     unusedKeys = []
     locked = []
 
