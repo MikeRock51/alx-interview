@@ -37,8 +37,6 @@ def minOperations(n: int) -> int:
                 minOp += i
                 quo //= i
                 break
-    # print(f"Quo: {quo} before return")
-    # print(f"MinOp: {minOp} before return")
     return minOp + quo
 
 # print(isPrime(33))
@@ -46,4 +44,6 @@ def minOperations(n: int) -> int:
 # print(minOperations(4))
 # print(minOperations(9))
 # print(minOperations(99))
-# print(minOperations(1))
+print(minOperations(2147483640))
+print(minOperations(19170307))
+print(minOperations(972))
