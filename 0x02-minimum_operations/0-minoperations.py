@@ -6,8 +6,40 @@
     operations needed to result in exactly n H characters in the file.
 """
 
+def isPrime(n: int) -> bool:
+    """Checks whether or not n is prime"""
+
+    if n < 2:
+        return False
+
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
 def minOperations(n: int) -> int:
     """
         Calculates the fewest number of operations needed to
         result in exactly n H characters in the file.
     """
+
+    minOp = 0
+    quo = n
+
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            minOp += i
+            print(i)
+            for p in range(2, int(quo ** 0.5) + 1):
+                if quo % p == 0:
+                    quo //= p
+                    break
+    print(f"Quo: {quo} before return")
+    print(f"MinOp: {minOp} before return")
+    return minOp + quo
+
+# print(isPrime(33))
+# print(minOperations(12))
+# print(minOperations(4))
+# print(minOperations(9))
+print(minOperations(99))
