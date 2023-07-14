@@ -26,20 +26,22 @@ def minOperations(n: int) -> int:
     minOp = 0
     quo = n
 
-    for i in range(2, int(n ** 0.5) + 1):
-        if n % i == 0:
-            minOp += i
-            print(i)
-            for p in range(2, int(quo ** 0.5) + 1):
-                if quo % p == 0:
-                    quo //= p
-                    break
-    print(f"Quo: {quo} before return")
-    print(f"MinOp: {minOp} before return")
+    if isPrime(n) or n < 2:
+        return 0
+
+    while not isPrime(quo):
+        for i in range(2, int(n ** 0.5) + 1):
+            if n % i == 0:
+                minOp += i
+                quo //= i
+                break
+    # print(f"Quo: {quo} before return")
+    # print(f"MinOp: {minOp} before return")
     return minOp + quo
 
 # print(isPrime(33))
 # print(minOperations(12))
 # print(minOperations(4))
 # print(minOperations(9))
-print(minOperations(99))
+# print(minOperations(99))
+# print(minOperations(1))
