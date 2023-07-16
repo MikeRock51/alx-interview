@@ -6,6 +6,7 @@
     operations needed to result in exactly n H characters in the file.
 """
 
+
 def minOperations(n: int) -> int:
     """
         Calculates the fewest number of operations needed to
