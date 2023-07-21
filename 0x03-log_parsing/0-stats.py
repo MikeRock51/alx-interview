@@ -10,7 +10,6 @@ import re
 
 def displayMetrics(fileSize: int, statusStat: dict) -> None:
     """Prints passed statistics to stdout"""
-
     print("File size: {}".format(fileSize))
     for status, count in sorted(statusStat.items()):
         print("{}: {}".format(status, count))
@@ -18,12 +17,6 @@ def displayMetrics(fileSize: int, statusStat: dict) -> None:
 
 def logParser() -> None:
     """Reads each line of stdin and prints statistics"""
-
-    # inputFormat = r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' \
-    #     r' - \[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6})\]' \
-    #     r' "(\w+ \S+ \S+)"' \
-    #     r' (\d{3})' \
-    #     r' (\d+)$'
 
     inputFormat = r'^(?P<ip>.+)' \
         r'\s*-\s*\[(?P<date>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6})\]' \
@@ -39,7 +32,6 @@ def logParser() -> None:
         for line in stdin:
             match = re.match(inputFormat, line)
             if not match:
-                print("Unmatched", line)
                 fileSize = (line.split()[-1].strip('\\n'))
                 try:
                     fileSizeSum += int(fileSize)
@@ -47,7 +39,6 @@ def logParser() -> None:
                     pass
                 continue
 
-            print("match", line)
             statusCode = match.group('statusCode')
             fileSize = match.group('fileSize')
 
@@ -66,11 +57,11 @@ def logParser() -> None:
 
             if not counter % 10:
                 displayMetrics(fileSizeSum, statusCodes)
-
-        displayMetrics(fileSizeSum, statusCodes)
     except KeyboardInterrupt:
         displayMetrics(fileSizeSum, statusCodes)
         raise
+    finally:
+        displayMetrics(fileSizeSum, statusCodes)
 
 
 if __name__ == '__main__':

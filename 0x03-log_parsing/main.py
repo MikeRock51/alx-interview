@@ -20,3 +20,5 @@ for case in testCases:
     sys.stdout.write(case)
 
 sys.stdout.flush()
+
+'188.213.11.218-[2017-02-05 23:31:21.690755] "GET /projects/260 HTTP/1.1" 287 1000\n'
