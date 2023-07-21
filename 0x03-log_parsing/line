@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "Rock"
+echo "Paper"
+echo "Scissors"

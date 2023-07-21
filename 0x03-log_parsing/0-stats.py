@@ -5,7 +5,7 @@ from sys import stdin
 import re
 
 
-statuses = ["200", "301", "400", "401", "403", "404", "405", "500"]
+# statuses = ["200", "301", "400", "401", "403", "404", "405", "500"]
 
 
 def displayMetrics(fileSize: int, statusStat: dict) -> None:
@@ -13,18 +13,23 @@ def displayMetrics(fileSize: int, statusStat: dict) -> None:
 
     print("File size: {}".format(fileSize))
     for status, count in sorted(statusStat.items()):
-        if status in statuses:
-            print("{}: {}".format(status, count))
+        print("{}: {}".format(status, count))
 
 
 def logParser() -> None:
     """Reads each line of stdin and prints statistics"""
 
-    inputFormat = r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' \
-        r' - \[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6})\]' \
-        r' "(\w+ \S+ \S+)"' \
-        r' (\d{3})' \
-        r' (\d+)$'
+    # inputFormat = r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' \
+    #     r' - \[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6})\]' \
+    #     r' "(\w+ \S+ \S+)"' \
+    #     r' (\d{3})' \
+    #     r' (\d+)$'
+
+    inputFormat = r'^(?P<ip>.+)' \
+        r'\s*-\s*\[(?P<date>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6})\]' \
+        r'\s+"GET\s+/projects/260\s+HTTP/1\.1"' \
+        r'\s+(?P<statusCode>200|301|400|401|403|404|405|500)' \
+        r'\s+(?P<fileSize>\d{1,4})\n$'
 
     counter = 0
     statusCodes = {}
@@ -34,10 +39,17 @@ def logParser() -> None:
         for line in stdin:
             match = re.match(inputFormat, line)
             if not match:
+                print("Unmatched", line)
+                fileSize = (line.split()[-1].strip('\\n'))
+                try:
+                    fileSizeSum += int(fileSize)
+                except Exception:
+                    pass
                 continue
 
-            statusCode = match.group(4)
-            fileSize = match.group(5)
+            print("match", line)
+            statusCode = match.group('statusCode')
+            fileSize = match.group('fileSize')
 
             try:
                 int(statusCode)
@@ -54,6 +66,7 @@ def logParser() -> None:
 
             if not counter % 10:
                 displayMetrics(fileSizeSum, statusCodes)
+
         displayMetrics(fileSizeSum, statusCodes)
     except KeyboardInterrupt:
         displayMetrics(fileSizeSum, statusCodes)
