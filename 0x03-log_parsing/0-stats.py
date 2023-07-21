@@ -14,11 +14,7 @@ def displayMetrics(fileSize: int, statusStat: dict) -> None:
     print("File size: {}".format(fileSize))
     for status, count in sorted(statusStat.items()):
         if status in statuses:
-            try:
-                int(status)
-                print("{}: {}".format(status, count))
-            except Exception:
-                continue
+            print("{}: {}".format(status, count))
 
 
 def logParser() -> None:
@@ -42,6 +38,11 @@ def logParser() -> None:
 
             statusCode = match.group(4)
             fileSize = match.group(5)
+
+            try:
+                int(statusCode)
+            except Exception:
+                continue
 
             if statusCode not in statusCodes:
                 statusCodes[statusCode] = 1
