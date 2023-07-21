@@ -17,6 +17,7 @@ def logParser():
     counter = 0
     statusCodes = {}
     fileSizeSum = 0
+    statuses = ["200", "301", "400", "401", "403", "404", "405", "500"]
 
     for line in stdin:
         match = re.match(inputFormat, line)
@@ -38,11 +39,12 @@ def logParser():
         if not counter % 10:
             print(f"File size: {fileSizeSum}")
             for status, count in sorted(statusCodes.items()):
-                try:
-                    int(status)
-                    print(f"{status}: {count}")
-                except Exception:
-                    continue
+                if status in statuses:
+                    try:
+                        int(status)
+                        print(f"{status}: {count}")
+                    except Exception:
+                        continue
 
 if __name__ == '__main__':
     logParser()
