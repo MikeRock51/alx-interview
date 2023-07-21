@@ -53,7 +53,7 @@ def logParser() -> None:
 
             if not counter % 10:
                 displayMetrics(fileSizeSum, statusCodes)
-        # displayMetrics(fileSizeSum, statusCodes)
+        displayMetrics(fileSizeSum, statusCodes)
     except KeyboardInterrupt:
         displayMetrics(fileSizeSum, statusCodes)
         raise
