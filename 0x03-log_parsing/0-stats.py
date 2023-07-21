@@ -38,8 +38,11 @@ def logParser():
         if not counter % 10:
             print(f"File size: {fileSizeSum}")
             for status, count in sorted(statusCodes.items()):
-                print(f"{status}: {count}")
-
+                try:
+                    int(status)
+                    print(f"{status}: {count}")
+                except Exception:
+                    continue
 
 if __name__ == '__main__':
     logParser()
