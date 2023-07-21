@@ -5,7 +5,23 @@ from sys import stdin
 import re
 
 
-def logParser():
+statuses = ["200", "301", "400", "401", "403", "404", "405", "500"]
+
+
+def displayMetrics(fileSize: int, statusStat: dict) -> None:
+    """Prints passed statistics to stdout"""
+
+    print("File size: {}".format(fileSize))
+    for status, count in sorted(statusStat.items()):
+        if status in statuses:
+            try:
+                int(status)
+                print("{}: {}".format(status, count))
+            except Exception:
+                continue
+
+
+def logParser() -> None:
     """Reads each line of stdin and prints statistics"""
 
     inputFormat = r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' \
@@ -17,34 +33,31 @@ def logParser():
     counter = 0
     statusCodes = {}
     fileSizeSum = 0
-    statuses = ["200", "301", "400", "401", "403", "404", "405", "500"]
 
-    for line in stdin:
-        match = re.match(inputFormat, line)
-        if not match:
-            continue
+    try:
+        for line in stdin:
+            match = re.match(inputFormat, line)
+            if not match:
+                continue
 
-        statusCode = match.group(4)
-        fileSize = match.group(5)
+            statusCode = match.group(4)
+            fileSize = match.group(5)
 
-        if statusCode not in statusCodes:
-            statusCodes[statusCode] = 1
-        else:
-            statusCodes[statusCode] += 1
+            if statusCode not in statusCodes:
+                statusCodes[statusCode] = 1
+            else:
+                statusCodes[statusCode] += 1
 
-        fileSizeSum += int(fileSize)
+            fileSizeSum += int(fileSize)
+            counter += 1
 
-        counter += 1
+            if not counter % 10:
+                displayMetrics(fileSizeSum, statusCodes)
+        displayMetrics(fileSizeSum, statusCodes)
+    except KeyboardInterrupt:
+        displayMetrics(fileSizeSum, statusCodes)
+        raise
 
-        if not counter % 10:
-            print(f"File size: {fileSizeSum}")
-            for status, count in sorted(statusCodes.items()):
-                if status in statuses:
-                    try:
-                        int(status)
-                        print(f"{status}: {count}")
-                    except Exception:
-                        continue
 
 if __name__ == '__main__':
     logParser()
