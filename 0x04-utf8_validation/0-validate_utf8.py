@@ -7,10 +7,10 @@ def validUTF8(data):
     if type(data) != list or len(data) < 1:
         return False
 
-    for byte in data:
-        if type(byte) != int:
-            return False
-        
+    # for byte in data:
+    #     if type(byte) != int:
+    #         return False
+
     byte_count = 0
 
     for i in data:
