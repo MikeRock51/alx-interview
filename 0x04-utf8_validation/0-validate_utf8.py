@@ -4,6 +4,9 @@
 
 def validUTF8(data):
     """Determines of a given data set represents a valid UTF-8 encoding"""
+    if type(data) != list or len(data) < 1:
+        return False
+
     bits = len(format(data[0], '07b'))
 
     for n in data:
