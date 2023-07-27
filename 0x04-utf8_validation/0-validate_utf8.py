@@ -8,16 +8,16 @@ def validUTF8(data):
 
     for char in data:
         if numOfBytes == 1:
-            if char >> 5 in [0b110, 0b1110]:
+            if char >> 5 in [6, 14]:
                 numOfBytes = 2
-            elif char >> 4 == 0b1110:
+            elif char >> 4 == 14:
                 numOfBytes = 3
-            elif char >> 3 == 0b11110:
+            elif char >> 3 == 30:
                 numOfBytes = 4
-            elif char >> 7 == 0b1:
+            elif char >> 7 == 1:
                 return False
         else:
-            if char >> 6 != 0b10:
+            if char >> 6 != 2:
                 return False
             numOfBytes -= 1
     return numOfBytes == 1
