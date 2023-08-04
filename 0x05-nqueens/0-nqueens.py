@@ -23,4 +23,14 @@ if N < 4:
     print("N must be at least 4")
     exit(1)
 
-print(type(N))
+board = []
+
+for i in range(N):
+    row = []
+    for col in range(N):
+        row.append([i, col])
+
+    board.append(row)
+
+for row in board:
+    print(row)
