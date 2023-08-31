@@ -16,10 +16,10 @@ if __name__ == "__main__":
 
     # Test case 2: Island along the border
     grid2 = [
-        [0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0],
         [0, 1, 1, 0, 0],
         [0, 1, 1, 0, 0],
-        [0, 0, 0, 0, 0]
+        [0, 1, 0, 0, 0]
     ]
     # Expected result: 14
     print(island_perimeter(grid2))
