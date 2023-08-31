@@ -12,6 +12,11 @@ def island_perimeter(grid):
     assert 1 <= len(grid) <= 100, "Number of rows is out of range"
     assert all(1 <= len(row) <=
                100 for row in grid), "Number of columns is out of range"
+    
+    assert all(cell == 0 for cell in grid[0]), "Top border is not water"
+    assert all(cell == 0 for cell in grid[-1]), "Bottom border is not water"
+    assert all(row[0] == 0 for row in grid), "Left border is not water"
+    assert all(row[-1] == 0 for row in grid), "Right border is not water"
 
     for i in range(1, gridHeight - 1):
         for j in range(1, gridWidth - 1):
