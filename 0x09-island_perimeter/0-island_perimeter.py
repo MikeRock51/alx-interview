@@ -5,6 +5,8 @@
 def island_perimeter(grid):
     """Returns the perimeter of the island defined in grid"""
     gridHeight = len(grid)
+    if gridHeight < 1:
+        return 0
     gridWidth = len(grid[0])
     perimeter = 0
 
