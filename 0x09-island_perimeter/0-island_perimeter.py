@@ -13,18 +13,26 @@ def island_perimeter(grid):
     assert all(1 <= len(row) <=
                100 for row in grid), "Number of columns is out of range"
 
-    for i in range(1, gridHeight - 1):
-        for j in range(1, gridWidth - 1):
+    for i in range(gridHeight):
+        for j in range(gridWidth):
             assert grid[i][j] in (
                 0, 1), f"Invalid cell value at row {i}, col {j}"
             if grid[i][j] == 1:
-                if grid[i][j - 1] == 0:
+                if j == 0:
                     perimeter += 1
-                if grid[i][j + 1] == 0:
+                elif grid[i][j - 1] == 0:
                     perimeter += 1
-                if grid[i - 1][j] == 0:
+                if j == gridWidth - 1:
                     perimeter += 1
-                if grid[i + 1][j] == 0:
+                elif grid[i][j + 1] == 0:
+                    perimeter += 1
+                if i == 0:
+                    perimeter += 1
+                elif grid[i - 1][j] == 0:
+                    perimeter += 1
+                if i == gridHeight - 1:
+                    perimeter += 1
+                elif grid[i + 1][j] == 0:
                     perimeter += 1
 
     return perimeter
