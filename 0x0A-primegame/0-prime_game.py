@@ -34,8 +34,14 @@ def isWinner(x, nums):
             if isPrime(n):
                 primes.append(n)
 
+        primesLength = len(primes)
+
+        # If current num has no prime numbers, Ben wins
+        if primesLength == 0:
+            wins['Ben'] += 1
+
         # If there are odd numbers of prime numbers, Maria wins the round
-        if len(primes) % 2 != 0:
+        if primesLength % 2 != 0:
             wins['Maria'] += 1
         else:  # otherwise Ben wins the round
             wins['Ben'] += 1
