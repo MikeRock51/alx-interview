@@ -36,7 +36,7 @@ def isWinner(x, nums):
 
         primesLength = len(primes)
 
-        # If current num has no prime numbers, Ben wins
+        # If current num has no prime numbers, Ben wins the round
         if primesLength == 0:
             wins['Ben'] += 1
 
