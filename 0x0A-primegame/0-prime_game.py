@@ -42,17 +42,14 @@ def isWinner(x, nums):
         else:  # otherwise Ben wins the round
             wins['Ben'] += 1
 
-    # Ben wins if the game ends on first round
-    if wins['Maria'] == 0 and wins['Ben'] == 0:
-        return 'Ben'
+    # If a winner cannot be determined
+    if wins['Maria'] == wins['Ben']:
+        return None
 
     # Get the player with the highest rounds won
-    if wins['Maria'] > wins['Ben']:
-        return 'Maria'
-    elif wins['Ben'] > wins['Maria']:
-        return 'Ben'
+    keyMax = max(wins, key=lambda x: wins[x])
 
-    return None
+    return keyMax
 
 
 if __name__ == '__main__':
