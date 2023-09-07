@@ -36,18 +36,17 @@ def isWinner(x, nums):
 
         primesLength = len(primes)
 
-        # If current num has no prime numbers, Ben wins the round
-        if primesLength == 0:
-            wins['Ben'] += 1
-
         # If there are odd numbers of prime numbers, Maria wins the round
         if primesLength % 2 != 0:
             wins['Maria'] += 1
         else:  # otherwise Ben wins the round
             wins['Ben'] += 1
 
-    # If a winner cannot be determined
+    # If there is a tie
     if wins['Maria'] == wins['Ben']:
+        # Ben wins if the game ends on first round
+        if wins['Maria'] == 0 and wins['Ben'] == 0:
+            return 'Ben'
         return None
 
     # Get the player with the highest rounds won
