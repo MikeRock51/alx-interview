@@ -4,6 +4,11 @@
 
 def isWinner(x, nums):
     """Returns the winner of the game"""
+    wins = {
+        'Ben': 0,
+        'Maria': 0,
+    }
+
     def isPrime(num):
         """Returns whether or nor a number is a prime number"""
         if num <= 1:
@@ -14,21 +19,15 @@ def isWinner(x, nums):
             return False
 
         i = 5
-        while (i * i < num):
+        while (i * i <= num):
             if not num % i or not num % (i + 2):
                 return False
             i += 6
 
         return True
 
-    wins = {
-        'Ben': 0,
-        'Maria': 0,
-    }
-
     for i in range(x):
         primes = []
-        players = ['Maria', 'Ben']
 
         for n in range(2, nums[i] + 1):
             if isPrime(n):
