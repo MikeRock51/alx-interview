@@ -42,7 +42,6 @@ def isWinner(x, nums):
         else:  # otherwise Ben wins the round
             wins['Ben'] += 1
 
-
     # Ben wins if the game ends on first round
     if wins['Maria'] == 0 and wins['Ben'] == 0:
         return 'Ben'
