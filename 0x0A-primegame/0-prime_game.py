@@ -29,19 +29,22 @@ def isWinner(x, nums):
     for i in range(x):
         primes = []
 
+        # Extract all prime numbers for n
         for n in range(2, nums[i] + 1):
             if isPrime(n):
                 primes.append(n)
 
-        # print(f'Primes: {primes}')
+        # If there are odd numbers of prime numbers, Maria wins the round
         if len(primes) % 2 != 0:
             wins['Maria'] += 1
-        else:
+        else:  # otherwise Ben wins the round
             wins['Ben'] += 1
 
+    # If a winner cannot be determined
     if wins['Maria'] == wins['Ben']:
         return None
 
+    # Get the player with the highest rounds won
     keyMax = max(wins, key=lambda x: wins[x])
 
     return keyMax
