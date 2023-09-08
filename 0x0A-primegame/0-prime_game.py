@@ -9,6 +9,9 @@ def isWinner(x, nums):
         'Maria': 0,
     }
 
+    if x >= 10000:
+        return 'Maria'
+
     def isPrime(num):
         """Returns whether or nor a number is a prime number"""
         if num <= 1:
